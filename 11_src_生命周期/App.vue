@@ -10,7 +10,7 @@ import { ref } from 'vue';
 export default {
   name: 'App',
   components:{
-    DemoVue,
+    DemoVue
   },
   setup() {
     let isShowDemo = ref(true);
