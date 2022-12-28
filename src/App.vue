@@ -1,23 +1,34 @@
 <template>
-  <button @click="isShowDemo = !isShowDemo">切换隐藏Demo</button>
-  <DemoVue v-if="isShowDemo">
-  </DemoVue>
+    <h3>我是App组件(祖)</h3>
 </template>
 
 <script>
-import DemoVue from './components/Demo.vue';
-import { ref } from 'vue';
-export default {
-  name: 'App',
-  components:{
-    DemoVue,
-  },
-  setup() {
-    let isShowDemo = ref(true);
-    return {
-      isShowDemo
+import { reactive, readonly, ref, toRefs, isRef, isReactive, isReadonly, isProxy, markRaw, toRaw } from 'vue';
+  export default {
+    name: 'App',
+    setup() {
+      let car = reactive({
+        name: '劳斯莱斯',
+        price: '400W'
+      });
+      let sum = ref(0);
+      let car2 = readonly(car);
+      let car3 = toRaw(car)
+      console.log(isRef(sum));
+      console.log(isReadonly(car2));
+      console.log(isReactive(car));
+      console.log(isProxy(car3));
+      console.log(isProxy(sum));
+      return {
+        ...toRefs(car)
+      }
     }
   }
-}
 </script>
 
+<style scoped>
+.app{
+  background-color: gray;
+  padding: 10px;
+}
+</style>

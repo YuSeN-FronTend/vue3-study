@@ -1,0 +1,23 @@
+<template>
+  <button @click="isShowDemo = !isShowDemo">切换隐藏Demo</button>
+  <DemoVue v-if="isShowDemo">
+  </DemoVue>
+</template>
+
+<script>
+import DemoVue from './components/Demo.vue';
+import { ref } from 'vue';
+export default {
+  name: 'App',
+  components:{
+    DemoVue,
+  },
+  setup() {
+    let isShowDemo = ref(true);
+    return {
+      isShowDemo
+    }
+  }
+}
+</script>
+
