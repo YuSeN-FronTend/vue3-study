@@ -1,28 +1,26 @@
 <template>
-    <h3>我是App组件(祖)</h3>
+  <div class="app">
+    <h3>我是App组件</h3>
+    <Suspense>
+      <template v-slot:default>
+        <Child />
+      </template>
+      <template v-slot:fallback>
+        <h3>稍等，加载中。。。</h3>
+      </template>
+    </Suspense>
+  </div>
 </template>
 
 <script>
-import { reactive, readonly, ref, toRefs, isRef, isReactive, isReadonly, isProxy, markRaw, toRaw } from 'vue';
+// import Child from './components/child' // 静态引入
+  import { defineAsyncComponent } from 'vue'; 
+  const Child = defineAsyncComponent(()=>import('./components/child.vue')) // 动态引入 也叫异步引入
   export default {
     name: 'App',
-    setup() {
-      let car = reactive({
-        name: '劳斯莱斯',
-        price: '400W'
-      });
-      let sum = ref(0);
-      let car2 = readonly(car);
-      let car3 = toRaw(car)
-      console.log(isRef(sum));
-      console.log(isReadonly(car2));
-      console.log(isReactive(car));
-      console.log(isProxy(car3));
-      console.log(isProxy(sum));
-      return {
-        ...toRefs(car)
-      }
-    }
+    components: {
+      Child
+    },
   }
 </script>
 
